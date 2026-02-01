@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pink Moment 💗</title>
+
+<style>
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffe0ef, #ff4f9a);
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center;     /* Vertical center */
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 18px;
+    animation: float 5s linear infinite;
+    opacity: .6;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-120vh) rotate(360deg); }
+  }
+
+  /* Compact Card Design */
+  .card {
+    background: #fff0f6;
+    width: 85%;
+    max-width: 300px; /* Reduced width for better proportion */
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    animation: pop 0.5s ease;
+    position: relative;
+    z-index: 10;
+  }
+  @keyframes pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  /* Proportional Image */
+  .card img {
+    width: 100%;
+    height: auto;
+    max-height: 280px; /* Kept it tight */
+    border-radius: 15px;
+    margin-bottom: 15px;
+    object-fit: cover;
+    display: block;
+  }
+
+  h1 {
+    font-size: 18px; /* Slightly smaller text */
+    color: #d1006f;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+  }
+
+  .buttons {
+    position: relative;
+    height: 60px; /* More compact button area */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    border: none;
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+
+  #yes {
+    background: #ff1493;
+    color: white;
+    box-shadow: 0 4px 10px rgba(255,0,120,0.3);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  #no {
+    position: absolute;
+    background: #ffc1dd;
+    color: #7a0040;
+    white-space: nowrap;
+    z-index: 5;
+    touch-action: none; 
+  }
+
+  /* Final Card (Matches Proportions) */
+  .final { display: none; }
+  .final h2 { 
+    color: #ff0066; 
+    margin-bottom: 15px; 
+    font-size: 22px; 
+  }
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="step1">
+  <img src="https://i.postimg.cc/DyL68STj/IMG-20251225-225610-642.jpg" alt="Niloy">
+  <h1>Niloy, will you be my fu*kbuddy?</h1>
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+</div>
+
+<div class="card final" id="step2">
+  <h2>Opa! Baby 🫦💦</h2>
+  <img src="https://media.giphy.com/media/10URyRFR5oNN0A/giphy.gif" alt="Reveal">
+</div>
+
+<script>
+/* Hearts */
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💗";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = 3 + Math.random() * 3 + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 400);
+
+/* No Button Escape */
+const no = document.getElementById("no");
+function escape() {
+  const x = Math.random() * 180 - 90; 
+  const y = Math.random() * 140 - 70;
+  no.style.transform = `translate(${x}px, ${y}px)`;
+}
+no.addEventListener("mouseover", escape);
+no.addEventListener("touchstart", (e) => { e.preventDefault(); escape(); });
+
+/* Yes Button Click */
+const yesBtn = document.getElementById("yes");
+const music = document.getElementById("bgMusic");
+yesBtn.onclick = () => {
+  music.play().catch(e => {});
+  document.getElementById("step1").style.display = "none";
+  document.getElementById("step2").style.display = "block";
+};
+</script>
+
+</body>
+</html>
